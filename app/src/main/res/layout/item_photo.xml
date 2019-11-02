@@ -21,13 +21,14 @@
 
             <ImageView
                 android:id="@+id/ivPhoto"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:loadImage="@{photo.downloadUrl}"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvAuthor"

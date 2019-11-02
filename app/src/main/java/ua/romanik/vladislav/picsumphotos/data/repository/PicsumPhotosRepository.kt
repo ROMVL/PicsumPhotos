@@ -10,7 +10,7 @@ class PicsumPhotosRepository(
     private val picsumPhotoModelToDomainPhotoModelMapper: DataPicsumPhotoModelToDomainPhotoModelMapper
 ) : IPhotosRepository {
 
-    override suspend fun fetchPhotos(page: Int, limit: Int): List<Photo> {
+    override suspend fun fetchPhotos(page: Long, limit: Int): List<Photo> {
         return picsumPhotosApi.fetchPhotos(page, limit).map {
             picsumPhotoModelToDomainPhotoModelMapper.convert(it)
         }

@@ -2,8 +2,6 @@ package ua.romanik.vladislav.picsumphotos.presentation.databinding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 
@@ -18,11 +16,7 @@ fun ImageView.loadImage(url: String) {
 
     Glide.with(this)
         .load(url)
+        .override(600, 200)
         .placeholder(circularProgressDrawable)
         .into(this)
-}
-
-@BindingAdapter("app:submitList")
-fun RecyclerView.submitList(data: List<Any>?) {
-    (this.adapter as? ListAdapter<Any, *>)?.submitList(data ?: emptyList())
 }

@@ -1,41 +1,41 @@
 package ua.romanik.vladislav.picsumphotos.presentation.ui.photoslist
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import ua.romanik.vladislav.picsumphotos.domain.datasource.PhotoDataSourceFactory
 import ua.romanik.vladislav.picsumphotos.domain.model.Photo
-import ua.romanik.vladislav.picsumphotos.domain.usecase.FetchPhotosUseCase
-import ua.romanik.vladislav.picsumphotos.presentation.base.livedata.Event
+import ua.romanik.vladislav.picsumphotos.domain.repository.IPhotosRepository
 import ua.romanik.vladislav.picsumphotos.presentation.base.viewmodel.BaseViewModel
 
 class PhotosListViewModel(
-    private val fetchPhotosUseCase: FetchPhotosUseCase
+    private val photosRepository: IPhotosRepository
 ) : BaseViewModel() {
 
     private val Tag = PhotosListViewModel::class.java.name
 
-    val photos by lazy { MutableLiveData<List<Photo>>() }
+    private lateinit var photos: LiveData<PagedList<Photo>>
 
     init {
-        loadPhotos()
+        initPagedConfig()
     }
 
-    private fun loadPhotos() {
-        viewModelScope.launch {
-            loading.value = Event(true)
-            fetchPhotosUseCase.execute {
-                onComplete { photosList ->
-                    Log.d(Tag, photosList.toString())
-                    photos.value = photosList
-                    loading.value = Event(false)
-                }
-                onError { errorModel ->
-                    error.value = errorModel
-                    loading.value = Event(false)
-                }
-            }
-        }
+    private fun initPagedConfig() {
+        val config = PagedList.Config.Builder()
+            .setPageSize(10)
+            .setInitialLoadSizeHint(5)
+            .setEnablePlaceholders(false)
+            .build()
+        photos = LivePagedListBuilder(
+            PhotoDataSourceFactory(
+                viewModelScope,
+                photosRepository
+            ),
+            config
+        ).build()
     }
+
+    fun getPagedPhotos(): LiveData<PagedList<Photo>> = photos
 
 }

@@ -1,6 +1,7 @@
 package ua.romanik.vladislav.picsumphotos.presentation.ui.photoslist
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
 import ua.romanik.vladislav.picsumphotos.R
@@ -15,6 +16,8 @@ class PhotosListFragment : BaseFragment(), PhotosAdapter.OnClickPhotoListener {
 
     override val viewModel: PhotosListViewModel by viewModel()
 
+    private val adapter by lazy { PhotosAdapter(this@PhotosListFragment) }
+
     override fun handleError() {
     }
 
@@ -22,8 +25,16 @@ class PhotosListFragment : BaseFragment(), PhotosAdapter.OnClickPhotoListener {
         super.onActivityCreated(savedInstanceState)
         with(binding as FragmentPhotosListBinding) {
             viewModel = this@PhotosListFragment.viewModel
-            rvPhotos.adapter = PhotosAdapter(this@PhotosListFragment)
+            rvPhotos.adapter = adapter
             rvPhotos.layoutManager = LinearLayoutManager(requireContext())
+        }
+        with(viewModel) {
+            getPagedPhotos().observe(
+                this@PhotosListFragment.viewLifecycleOwner,
+                Observer {
+                    adapter.submitList(it)
+                }
+            )
         }
     }
 

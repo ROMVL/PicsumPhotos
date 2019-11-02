@@ -26,8 +26,9 @@
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="@string/picsum_photos"
                 android:textColor="@color/white"
                 android:textSize="25sp"
@@ -45,7 +46,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBar"
-            app:submitList="@{viewModel.photos}"
             tools:listitem="@layout/item_photo" />
 
         <ProgressBar

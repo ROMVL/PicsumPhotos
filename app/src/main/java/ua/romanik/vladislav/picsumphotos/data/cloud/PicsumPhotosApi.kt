@@ -9,7 +9,7 @@ interface PicsumPhotosApi {
 
     @GET("/v2/list")
     suspend fun fetchPhotos(
-        @Query("page") page: Int,
+        @Query("page") page: Long,
         @Query("limit") limit: Int
     ): List<PicsumPhoto>
 

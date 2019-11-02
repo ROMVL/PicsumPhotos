@@ -25,7 +25,7 @@ class PhotosListViewModel(
         val config = PagedList.Config.Builder()
             .setPageSize(10)
             .setInitialLoadSizeHint(5)
-            .setEnablePlaceholders(false)
+            .setEnablePlaceholders(true)
             .build()
         photos = LivePagedListBuilder(
             PhotoDataSourceFactory(

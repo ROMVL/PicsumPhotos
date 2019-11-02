@@ -2,21 +2,17 @@ package ua.romanik.vladislav.picsumphotos.presentation.databinding
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import ua.romanik.vladislav.picsumphotos.presentation.base.glide.GlideModule
 
 
 @BindingAdapter("app:loadImage")
 fun ImageView.loadImage(url: String) {
-
-    val circularProgressDrawable = CircularProgressDrawable(this.context)
-    circularProgressDrawable.strokeWidth = 5f
-    circularProgressDrawable.centerRadius = 30f
-    circularProgressDrawable.start()
-
+    val circularProgressDrawable = GlideModule.GlideProgressBar.getCircularProgressDrawable(this.context)
     Glide.with(this)
         .load(url)
-        .override(600, 200)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .placeholder(circularProgressDrawable)
         .into(this)
 }

@@ -2,6 +2,7 @@ package ua.romanik.vladislav.picsumphotos.presentation.ui.photoslist
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
 import ua.romanik.vladislav.picsumphotos.R
@@ -39,7 +40,9 @@ class PhotosListFragment : BaseFragment(), PhotosAdapter.OnClickPhotoListener {
     }
 
     override fun onClick(photo: Photo) {
-
+        PhotosListFragmentDirections.actionPhotosListFragmentToPhotoDetailsFragment(photo.id).let {
+            findNavController().navigate(it)
+        }
     }
 
 }

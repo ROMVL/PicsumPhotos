@@ -8,7 +8,7 @@ import ua.romanik.vladislav.picsumphotos.presentation.base.glide.GlideModule
 
 
 @BindingAdapter("app:loadImage")
-fun ImageView.loadImage(url: String) {
+fun ImageView.loadImage(url: String?) {
     val circularProgressDrawable = GlideModule.GlideProgressBar.getCircularProgressDrawable(this.context)
     Glide.with(this)
         .load(url)

@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import ua.romanik.vladislav.picsumphotos.R
 import ua.romanik.vladislav.picsumphotos.domain.model.error.ErrorModel
 import ua.romanik.vladislav.picsumphotos.presentation.base.viewmodel.BaseViewModel
@@ -16,7 +17,7 @@ import ua.romanik.vladislav.picsumphotos.presentation.base.viewmodel.BaseViewMod
 abstract class BaseFragment : Fragment() {
 
     abstract val layoutId: Int
-    abstract val viewModel: BaseViewModel
+    abstract val viewModel: ViewModel
 
     abstract fun handleError()
 
@@ -40,7 +41,7 @@ abstract class BaseFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         with(viewModel) {
-            error.observe(this@BaseFragment.viewLifecycleOwner, Observer<ErrorModel> { handleError() })
+            //error.observe(this@BaseFragment.viewLifecycleOwner, Observer<ErrorModel> { handleError() })
         }
     }
 

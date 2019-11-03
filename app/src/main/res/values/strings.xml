@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Picsum Photos</string>
     <string name="picsum_photos">Picsum Photos</string>
+
+    <string name="save_photo">Save Photo</string>
+    <string name="save_with_resolution">Save with original resolution?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="share_photo">Share Photo</string>
+    <string name="share_with_resolution">Share with original resolution?</string>
+
+    <string name="photo_was_saved">Photo was saved</string>
 </resources>

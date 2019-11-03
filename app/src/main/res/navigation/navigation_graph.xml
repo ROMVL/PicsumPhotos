@@ -9,5 +9,23 @@
         android:id="@+id/photosListFragment"
         android:name="ua.romanik.vladislav.picsumphotos.presentation.ui.photoslist.PhotosListFragment"
         android:label="fragment_photos_list"
-        tools:layout="@layout/fragment_photos_list" />
+        tools:layout="@layout/fragment_photos_list" >
+        <action
+            android:id="@+id/action_photosListFragment_to_photoDetailsFragment"
+            app:destination="@id/photoDetailsFragment"
+            app:popUpTo="@+id/photosListFragment">
+            <argument
+                android:name="photo_id"
+                android:defaultValue="0L" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/photoDetailsFragment"
+        android:name="ua.romanik.vladislav.picsumphotos.presentation.ui.photodetails.PhotoDetailsFragment"
+        android:label="PhotoDetailsFragment" >
+        <argument
+            android:name="photo_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 </navigation>

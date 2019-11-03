@@ -11,4 +11,12 @@ data class Photo(
     val height: Int,
     val url: String,
     val downloadUrl: String
-) : Parcelable
+) : Parcelable {
+
+    fun getOriginalPhotoUrl() = "https://picsum.photos/id/${id}/${width}/${height}"
+
+    fun getFullHdPhotoUrl() = "https://picsum.photos/id/${id}/${1080}/${1920}"
+
+    fun getFormattedWidthAndHeight() = "$width x $height"
+
+}
